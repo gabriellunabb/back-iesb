@@ -1,0 +1,103 @@
+openapi: 3.0.0
+info:
+  title: API REST Aula 07
+  description: Apizinha pra aula 7
+  version: 0.0.1-rc1
+servers:
+  - url: http://localhost:3000
+    description: Ambiente de desenvolvimento
+tags:
+  - name: produtos
+paths:
+  /produtos:
+    get:
+      tags:
+        - produtos
+    post:
+      tags:
+        - produtos
+      requestBody:
+        description: Um JSON com os dados do novo produto
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DadosProduto"
+      responses:
+        201:
+          description: Produto criado com sucesso 
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Produto"
+        422:
+          description: Nome e preço são obrigatórios
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Mensagem"
+  /produtos/{id}:
+    get:
+      tags:
+        - produtos
+    put:
+      tags:
+        - produtos
+      parameters:
+        - in: path #query cookie
+          name: id
+          type: integer
+          required: true
+          description: ID do produto a ser atualizado
+      requestBody:
+        description: Um JSON com os novos dados do produto
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DadosProduto"
+      responses:
+        200:
+          description: Produto alterado com sucesso 
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Produto"
+        404:
+          description: Produto não encontrado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Mensagem"
+        422:
+          description: Nome e preço são obrigatórios
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Mensagem"
+    delete:
+      tags:
+        - produtos
+components:
+  schemas:
+    DadosProduto:
+      type: object
+      properties:
+        nome:
+          type: string
+        preco:
+          type: number
+    Produto:
+      type: object
+      properties:
+        id:
+          type: integer
+        nome:
+          type: string
+        preco:
+          type: number
+    Mensagem:
+      type: object
+      properties:
+        msg:
+          type: string
