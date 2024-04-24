@@ -42,3 +42,10 @@ git pull origin branch_name
 ```shell
 git push origin branch_name
 ```
+
+8. Fazer merge com outra branch
+
+```shell
+git checkout branch_base
+git merge branch_compara
+```
