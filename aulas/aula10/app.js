@@ -5,6 +5,7 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 
 const produtosRouter = require("./routes/produtosRouter");
+const apidocsRouter = require("./routes/apidocsRouter");
 
 var app = express();
 
@@ -16,5 +17,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use("/produtos", produtosRouter);
+app.use("/api-docs", apidocsRouter);
 
 module.exports = app;

@@ -15,4 +15,18 @@ async function criar(req, res) {
     res.status(201).json({ produto });
 }
 
-module.exports = { validarDados, criar };
+async function buscarTodos(req, res) {
+    const produtos = await Produto.find({});
+    res.json(produtos);
+}
+
+async function buscarPorId(req, res) {
+    const produto = await Produto.findById(req.params.id);
+    if (produto) {
+        res.json(produto);
+    } else {
+        res.status(404).json({ msg: "Não encontrado!" });
+    }
+}
+
+module.exports = { validarDados, criar, buscarTodos, buscarPorId };
