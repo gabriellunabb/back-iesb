@@ -20,13 +20,40 @@ async function buscarTodos(req, res) {
     res.json(produtos);
 }
 
-async function buscarPorId(req, res) {
-    const produto = await Produto.findById(req.params.id);
-    if (produto) {
-        res.json(produto);
-    } else {
-        res.status(404).json({ msg: "Não encontrado!" });
+async function buscarPorId(req, res, next) {
+    try {
+        const produto = await Produto.findById(req.params.id);
+        if (produto) {
+            req.produto = produto;
+            next();
+        } else {
+            res.status(404).json({ msg: "Não encontrado!" });
+        }
+    } catch (e) {
+        res.status(400).json({ msg: "Id invalido!" });
     }
 }
 
-module.exports = { validarDados, criar, buscarTodos, buscarPorId };
+async function buscar(req, res) {
+    res.json(req.produto);
+}
+
+async function atualizar(req, res) {
+    const produto = await Produto.findByIdAndUpdate(req.params.id, req.body);
+    res.json(produto);
+}
+
+async function deletar(req, res) {
+    await Produto.deleteOne({ _id: req.params.id });
+    res.status(204).send();
+}
+
+module.exports = {
+    validarDados,
+    criar,
+    buscarTodos,
+    buscarPorId,
+    atualizar,
+    deletar,
+    buscar,
+};
