@@ -81,6 +81,7 @@ describe("API Loja Virtual", () => {
     test("204 DELETE /produtos/:id", async () => {
         const res = await req.delete(`/produtos/${id}`);
         expect(res.status).toBe(204);
+        expect(res.type).toBe("");
     });
 
     test("400 DELETE /produtos/:id", async () => {

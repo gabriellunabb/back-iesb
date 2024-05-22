@@ -48,6 +48,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Produto'
+        400:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Mensagem'
         404:
           content:
             application/json:
@@ -60,12 +65,22 @@ paths:
         - in: path
           type: string
           name: id
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Produto'
       responses:
         200:
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Produto'
+        400:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Mensagem'
         404:
           content:
             application/json:
@@ -86,6 +101,11 @@ paths:
       responses:
         204:
           content:
+        400:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Mensagem'
         404:
           content:
             application/json:

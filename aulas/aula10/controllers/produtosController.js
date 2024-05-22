@@ -45,7 +45,7 @@ async function atualizar(req, res) {
 
 async function deletar(req, res) {
     await Produto.deleteOne({ _id: req.params.id });
-    res.status(204).send();
+    res.status(204).end();
 }
 
 module.exports = {
