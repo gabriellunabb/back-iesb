@@ -30,7 +30,7 @@ async function entrar(req, res) {
     if (usuario) {
         if (usuario.senha === cifrarSenha(req.body.senha, usuario.salt))
             res.json({
-                token: jwt.sign({ email: usuario.email }, "123", {
+                token: jwt.sign({ email: usuario.email }, process.env.JWT_SECRET, {
                     expiresIn: "1m",
                 }),
             });

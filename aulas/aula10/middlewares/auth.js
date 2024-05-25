@@ -4,7 +4,7 @@ function validarToken(req, res, next) {
     const token = req.headers.authorization;
     if (token) {
         try {
-            const payload = jwt.verify(token, "123");
+            const payload = jwt.verify(token, process.env.JWT_SECRET);
             console.log(payload);
             next();
         } catch (e) {
