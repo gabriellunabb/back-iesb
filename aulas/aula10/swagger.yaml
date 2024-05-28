@@ -28,6 +28,8 @@ paths:
     get:
       tags:
         - produtos
+      security:
+        - JWTAuth: []
       responses:
         200:
           content:
@@ -112,6 +114,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/Mensagem'
 components:
+  securitySchemes:
+    JWTAuth:
+      type: apiKey
+      in: header
+      name: Authorization
   schemas:
     Produto:
       type: object
